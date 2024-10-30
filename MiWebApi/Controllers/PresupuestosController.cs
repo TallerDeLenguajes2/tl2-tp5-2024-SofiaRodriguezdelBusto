@@ -4,19 +4,19 @@ namespace MiWebApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class ProductosController : ControllerBase
+public class PresupuestosController : ControllerBase
 {
 
-    private readonly ILogger<ProductosController> _logger;
+    private readonly ILogger<PresupuestosController> _logger;
 
-    private ProductosRepository repoProductos;
+    private PresupuestosRepository repoPresupuestos;
 
-    public ProductosController(ILogger<ProductosController> logger)
+    public PresupuestosController(ILogger<PresupuestosController> logger)
     {
         _logger = logger;
-        repoProductos = new ProductosRepository();
+        repoPresupuestos = new PresupuestosRepository();
     }
-
+    /*
     [HttpPost("api/Producto")]
     public IActionResult CrearProductos(Producto producto)
     {
@@ -24,14 +24,14 @@ public class ProductosController : ControllerBase
         return Created();
 
     }
-
-    [HttpGet("api/Productos")]
-    public ActionResult<List<Producto>> GetProductos()
+*/
+    [HttpGet("api/Presupuestos")]
+    public ActionResult<List<Producto>> GetPresupuestos()
     {
-        return Ok(repoProductos.ObtenerProductos());
+        return Ok(repoPresupuestos.ObtenerPresupuestos());
     }
 
-
+    /*
     [HttpPut("api/Producto/{id}")]
     public IActionResult ModificarProductos(int id, Producto producto)
     {
@@ -39,5 +39,6 @@ public class ProductosController : ControllerBase
         return Ok();
 
     }
+    */
 
 }

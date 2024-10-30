@@ -72,6 +72,48 @@ class ProductosRepository
         }
 
     }
+
+    public Producto  ObtenerProductoPorId(int id)
+    {
+        Producto producto = new Producto();
+        string connectionString = @"Data Source = db/Tienda.db;Cache=Shared";
+
+        string query = @"SELECT * FROM Productos WHERE idProducto = @id ";
+
+        using (SqliteConnection connection = new SqliteConnection(connectionString))
+        {
+            connection.Open();
+            SqliteCommand command = new SqliteCommand(query,connection);
+            command.Parameters.AddWithValue("@id", id);
+            using (SqliteDataReader reader = command.ExecuteReader())
+            {
+                producto.IdProducto = Convert.ToInt32(reader["idProducto"]);
+                producto.Descripcion = reader["Descripcion"].ToString();
+                producto.Precio = Convert.ToInt32(reader["Precio"]);
+
+
+            }
+            connection.Close();            
+        }
+        return producto;
+    }
+
+    public void EliminarProductoPorId(int id)
+    {
+        string connectionString = @"Data Source = db/Tienda.db;Cache=Shared";
+
+        string query = @"DELETE FROM Productos WHERE idProducto = @Id;";
+
+        using (SqliteConnection connection = new SqliteConnection(connectionString))
+        {
+            connection.Open();
+            SqliteCommand command = new SqliteCommand(query,connection);
+            command.Parameters.AddWithValue("@id", id);
+            command.ExecuteNonQuery();
+            connection.Close();            
+        }
+    }
+
     
 
 }

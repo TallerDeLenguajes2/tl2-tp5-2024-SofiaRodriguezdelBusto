@@ -8,12 +8,11 @@ public class Presupuesto
     public string NombreDestinatario { get => nombreDestinatario; set => nombreDestinatario = value; }
     public List<PresupuestoDetalle> Detalle { get => detalle; set => detalle = value; }
 
-    public Presupuesto(int idPresupuesto, string nombreDestinatario, List<PresupuestoDetalle> detalles)
+    public Presupuesto(int idPresupuesto, string nombreDestinatario)
     {
         this.idPresupuesto = idPresupuesto;
         this.nombreDestinatario = nombreDestinatario;
-        detalle = detalles;
-
+        detalle = new List<PresupuestoDetalle>();
     }
 
     public double MontoPresupuesto()
