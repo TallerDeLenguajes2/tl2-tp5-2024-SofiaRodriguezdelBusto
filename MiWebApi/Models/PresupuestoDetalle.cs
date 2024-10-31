@@ -5,10 +5,10 @@ public class PresupuestoDetalle
 
     public PresupuestoDetalle(Producto producto, int cantidad)
     {
-        this.producto = producto;
-        this.cantidad = cantidad;
+        Producto = producto;
+        Cantidad = cantidad;
     }
 
-    public int Cantidad { get => cantidad; set => cantidad = value; }
     public Producto Producto { get => producto; set => producto = value; }
+    public int Cantidad { get => cantidad; set => cantidad = value; }
 }

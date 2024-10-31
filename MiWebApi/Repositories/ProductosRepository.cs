@@ -75,7 +75,7 @@ class ProductosRepository
 
     public Producto  ObtenerProductoPorId(int id)
     {
-        Producto producto = new Producto();
+        Producto producto = null;
         string connectionString = @"Data Source = db/Tienda.db;Cache=Shared";
 
         string query = @"SELECT * FROM Productos WHERE idProducto = @id ";
@@ -87,10 +87,13 @@ class ProductosRepository
             command.Parameters.AddWithValue("@id", id);
             using (SqliteDataReader reader = command.ExecuteReader())
             {
-                producto.IdProducto = Convert.ToInt32(reader["idProducto"]);
-                producto.Descripcion = reader["Descripcion"].ToString();
-                producto.Precio = Convert.ToInt32(reader["Precio"]);
-
+                if (reader.Read())
+                {
+                    producto = new Producto();
+                    producto.IdProducto = Convert.ToInt32(reader["idProducto"]);
+                    producto.Descripcion = reader["Descripcion"].ToString();
+                    producto.Precio = Convert.ToInt32(reader["Precio"]);
+                }
 
             }
             connection.Close();            

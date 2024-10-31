@@ -16,29 +16,40 @@ public class PresupuestosController : ControllerBase
         _logger = logger;
         repoPresupuestos = new PresupuestosRepository();
     }
-    /*
-    [HttpPost("api/Producto")]
-    public IActionResult CrearProductos(Producto producto)
+    [HttpPost("api/Presupuesto")]
+    public IActionResult CrearPresupuesto(Presupuesto presupuesto)
     {
-        repoProductos.CrearProducto(producto);
+        if(!repoPresupuestos.CrearPresupuesto(presupuesto)) return BadRequest();
         return Created();
-
     }
-*/
+
+    [HttpPost("api/Presupuesto/{id}/ProductoDetalle")]
+    public IActionResult AgregarProductoAlPresupuesto(int idPresupuesto, int idProducto, int cantidad)
+    {
+        if(!repoPresupuestos.AgregarProducto(idPresupuesto, idProducto, cantidad)) return BadRequest();
+        return Created();
+    }
+
     [HttpGet("api/Presupuestos")]
-    public ActionResult<List<Producto>> GetPresupuestos()
+    public ActionResult<List<Presupuesto>> GetPresupuestos()
     {
         return Ok(repoPresupuestos.ObtenerPresupuestos());
     }
 
-    /*
-    [HttpPut("api/Producto/{id}")]
-    public IActionResult ModificarProductos(int id, Producto producto)
+    [HttpGet("api/Presupuestos/{id}")]
+    public ActionResult<Presupuesto> GetPresupuestoPorId(int id)
     {
-        repoProductos.ModificarProducto(id, producto);
-        return Ok();
-
+        return Ok(repoPresupuestos.ObtenerPresupuestoPorId(id));
     }
-    */
+
+    [HttpDelete]
+
+    public IActionResult BorrarPresupuesto(int id)
+    {
+        repoPresupuestos.EliminarPresupuestoPorId(id);
+        return Ok();
+    }
+
+
 
 }
